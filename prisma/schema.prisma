@@ -9,6 +9,71 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  username  String   @unique
+  email     String?  @unique
+  password  String
+  domain    Domain[]
+}
+
+model Domain {
+  id          String     @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  name        String
+  description String
+  tags        String[]
+  visibility  Visibility @default(PRIVATE)
+  address     String
+  port        String
+  iceAddress  String
+  places      Place[]
+  owner       User?      @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model Place {
+  id          String     @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  name        String
+  description String
+  tags        String[]
+  visibility  Visibility @default(PRIVATE)
+  capacity    Int
+  thumbnail   String?
+  media       Media[]
+  maturity    Maturity   @default(UNRATED)
+  domain      Domain?    @relation(fields: [domainId], references: [id])
+  domainId    String?
+}
+
+enum Visibility {
+  OPEN
+  FRIENDS
+  CONNECTION
+  PRIVATE
+}
+
+enum Maturity {
+  ADULT
+  MATURE
+  TEEN
+  EVERYONE
+  UNRATED
+}
+
+model Media {
+  id        String  @id @default(uuid())
+  url       String
+  mediaType String
+  Place     Place?  @relation(fields: [placeId], references: [id])
+  placeId   String?
 }

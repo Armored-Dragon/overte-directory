@@ -47,38 +47,38 @@ export type patchUser = {
 
 // TODO: Existing roles in Overte?
 enum DirectoryRole {
-	admin = "admin",
-	moderator = "moderator",
-	user = "user",
-	banned = "banned"
+	ADMIN = "ADMIN",
+	MODERATOR = "MODERATOR",
+	USER = "USER",
+	BANNED = "BANNED"
 }
 
 enum DomainRole {
-	admin = "admin",
-	builder = "builder",
-	moderator = "moderator",
-	user = "user",
+	ADMIN = "ADMIN",
+	BUILDER = "BUILDER",
+	MODERATOR = "MODERATOR",
+	USER = "USER",
 }
 
 enum DomainVisibility {
-	open = "open",
-	friends = "friends",
-	connections = "connections",
-	private = "private"
+	OPEN = "OPEN",
+	FRIENDS = "FRIENDS",
+	CONNECTIONS = "CONNECTIONS",
+	PRIVATE = "PRIVATE"
 }
 
 enum Maturity {
-	adult = "adult",
-	mature = "mature",
-	teen = "teen",
-	everyone = "everyone",
-	unrated = "unrated"
+	ADULT = "ADULT",
+	MATURE = "MATURE",
+	TEEN = "TEEN",
+	EVERYONE = "EVERYONE",
+	UNRATED = "UNRATED"
 }
 
 enum UserAvailability {
-	friends = "friends",
-	connections = "connections",
-	all = "all"
+	FRIENDS = "FRIENDS",
+	CONNECTIONS = "CONNECTIONS",
+	ALL = "ALL"
 }
 
 type UserConnection = {
