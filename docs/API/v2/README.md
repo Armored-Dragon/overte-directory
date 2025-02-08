@@ -30,3 +30,7 @@ The base URL for the API is `https://<instance-url>/api`. An example request to 
 | POST    | /v2/places | Creates a Place listing | TODO |
 | PATCH    | /v2/places | Updates a place listing | TODO |
 | DELETE    | /v2/places | Delete a places listing | TODO |
+
+## Authentication
+Users may be required to authenticate to access some endpoints.
+TODO: Implement authentication
