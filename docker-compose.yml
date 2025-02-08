@@ -1,0 +1,36 @@
+name: overte-directory-server
+services:
+  db:
+    image: postgres
+    restart: always
+    expose:
+      - "5432"
+    volumes:
+      - overte-directory:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_NAME}
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@root.com
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+    restart: unless-stopped
+
+  overte-directory-interface:
+    build: .
+    container_name: overte-directory-interface
+    restart: on-failure
+    ports:
+      - "5051:5051"
+    env_file:
+      - .env
+volumes:
+  overte-directory:
