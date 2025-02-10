@@ -6,9 +6,10 @@ import * as types from './db_types'
 const router = express.Router();
 
 import * as users from './users';
+import * as domains from './domains';
 
-export const getUsers = (query: types.userQuery) => users.getUsers;
+// export const getUsers = (query: types.userQuery) => users.getUsers;
+export const getDomains = (query: types.domainQuery) => domains.getDomains;
 
-// export function getDomains(query: types.domainQuery = {}){}
 
 // export function getPlaces(query: types.placeQuery = {}){}

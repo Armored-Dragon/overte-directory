@@ -43,8 +43,6 @@ export type patchUser = {
 	connections?: UserConnection[],
 }
 
-
-
 // TODO: Existing roles in Overte?
 enum DirectoryRole {
 	ADMIN = "ADMIN",
