@@ -49,9 +49,8 @@ export async function postDomain(query: types.postDomain){
 		// TODO: Validate query
 		// TODO: Permission checks
 		// TODO: Fix typechecking
-		await prisma.domain.create({ data: dataObject as any });
-		return {success: true, domain: dataObject as object };
-
+		const response = await prisma.domain.create({ data: dataObject as any });
+		return {success: true, domain: response as object };
 	} catch (e) {
 		// TODO: Make this a separate file?
 		if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -68,7 +67,31 @@ export async function postDomain(query: types.postDomain){
 }
 
 // Update a part of the domain in the database
-export function patchDomain(){}
+export async function patchDomain(query : types.patchDomain){
+	try {
+		let dataObject : types.patchDomain = {
+			id: query.id,
+			name: query.name,
+			description: query.description,
+			tags: query.tags,
+			visibility: query.visibility,
+			address: query.address,
+			port: query.port,
+			managers: query.managers,
+			maturity: query.maturity,
+			protocolVersion: query.protocolVersion
+		}
+
+		// TODO: Validate query
+		// TODO: Permission checks
+
+		const response = await prisma.domain.update({ where: { id: dataObject.id }, data: { ...dataObject as object } });
+
+		return {success: true, domain: response};
+	} catch (e) {
+		return {success: false, error: e};
+	}
+}
 
 // Delete a domain from the database
 export function deleteDomain(){}

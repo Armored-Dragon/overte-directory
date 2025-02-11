@@ -55,6 +55,18 @@ export type postDomain = {
 	owner: any,
 	protocolVersion: string,
 }
+export type patchDomain = {
+	id: string,
+	name?: string, 
+	description?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	address?: string,
+	port?: string,
+	managers?: string[],
+	maturity?: Maturity[],
+	protocolVersion?: string,
+}
 
 // TODO: Existing roles in Overte?
 const enum DirectoryRole {

@@ -9,8 +9,8 @@ import * as users from './users';
 import * as domains from './domains';
 
 // export const getUsers = (query: types.userQuery) => users.getUsers;
-export const getDomains = (query: types.domainQuery) => domains.getDomains;
-export const postDomain = (query: types.domainQuery) => domains.postDomain;
-
+export const getDomains = () => domains.getDomains;
+export const postDomain = () => domains.postDomain;
+export const patchDomain = () => domains.patchDomain;
 
 // export function getPlaces(query: types.placeQuery = {}){}
