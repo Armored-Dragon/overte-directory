@@ -7,17 +7,8 @@ export type userQuery = {
 	roles?: DirectoryRole[]				// This is a directory level list of roles that a user has. Do not confuse this for domain level roles.
 }
 
-export type domainQuery = {
-	id?: string,
-	name?: string,
-	tags?: string[],
-	visibility?: DomainVisibility[],
-	managers?: string[],
-	maturity?: Maturity[],
-	protocolVersion?: string,
-}
 
-export type placeQuery = {
+export type getPlace = {
 	id?: string,
 	name?: string,
 	tags?: string[],
@@ -43,6 +34,15 @@ export type patchUser = {
 	connections?: UserConnection[],
 }
 
+export type getDomain = {
+	id?: string,
+	name?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	managers?: string[],
+	maturity?: Maturity[],
+	protocolVersion?: string,
+}
 export type postDomain = {
 	name: string, 
 	description?: string,

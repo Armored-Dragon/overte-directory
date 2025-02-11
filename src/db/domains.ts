@@ -4,9 +4,9 @@ import * as types from './db_types'
 const prisma = new PrismaClient();
 
 // Search for a domain in the database.
-export async function getDomain(query: types.domainQuery = {}){
+export async function getDomain(query: types.getDomain = {}){
 	try {
-		let whereObject : types.domainQuery = {
+		let whereObject : types.getDomain = {
 			id: query.id,
 			name: query.name,
 			tags: query.tags,

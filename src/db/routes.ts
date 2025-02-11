@@ -7,13 +7,14 @@ const router = express.Router();
 
 import * as users from './users';
 import * as domains from './domains';
+import * as places from './places'
 
 export const getDomains = () => domains.getDomain;
 export const postDomain = () => domains.postDomain;
 export const patchDomain = () => domains.patchDomain;
 export const deleteDomain = () => domains.deleteDomain;
 
-// export const getPlaces = () => places.get;
+export const getPlace = () => places.getPlace;
 // export const postPlace = () => places.post;
 // export const patchPlace = () => places.patch;
 // export const deletePlace = () => places.delete;
