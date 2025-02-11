@@ -3,7 +3,6 @@ import * as types from './db_types'
 
 const prisma = new PrismaClient();
 
-// Search for a domain in the database.
 export async function getPlace(query: types.getPlace = {}){
 	try {
 		let whereObject : types.getDomain = {
@@ -25,3 +24,50 @@ export async function getPlace(query: types.getPlace = {}){
 		return {success: false, error: e};
 	}
 }
+
+export async function postPlace(query: types.postPlace){
+	try {
+		let dataObject : types.postPlace = {
+			name: query.name,
+			description: query.description,
+			tags: query.tags,
+			visibility: query.visibility,
+			managers: query.managers,
+			maturity: query.maturity,
+			media: query.media,
+			thumbnail: query.thumbnail,
+			capacity: query.capacity,
+
+			domain: {
+				connect: {
+					id: query.domain
+				}
+			}
+		}
+
+		// TODO: Validate query
+		// TODO: Permission checks
+		// TODO: Fix typechecking
+		const response = await prisma.place.create({ data: {...dataObject as any } });
+
+		return {success: true, place: response as object };
+	} catch (e) {
+		console.error(e);
+		// TODO: Make this a separate file?
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			console.log(e.code);
+			if (e.code === "P2002") {
+				// Constraint failures
+				// Typically this is when we try to create some flavor of a duplicate entry.
+				return {success: false, error: "Place already exists with that name in the domain."}
+			}
+			return {success: false, error: e.message};
+		}
+
+		return {success: false, error: "Unknown Error"};
+	}
+}
+
+
+// export async function patchPlace(query: types.getPlace = {}){}
+// export async function deletePlace(query: types.getPlace = {}){}

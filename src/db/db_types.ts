@@ -7,16 +7,6 @@ export type userQuery = {
 	roles?: DirectoryRole[]				// This is a directory level list of roles that a user has. Do not confuse this for domain level roles.
 }
 
-
-export type getPlace = {
-	id?: string,
-	name?: string,
-	tags?: string[],
-	visibility?: DomainVisibility[],
-	managers?: string[],
-	maturity?: Maturity[],
-}
-
 // POST request for creating data for the database
 export type postUser = {
 	username: string, 
@@ -69,6 +59,28 @@ export type patchDomain = {
 }
 export type deleteDomain = {
 	id: string,
+}
+
+
+export type getPlace = {
+	id?: string,
+	name?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	managers?: string[],
+	maturity?: Maturity[],
+}
+export type postPlace = {
+	name: string,
+	description?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	managers?: string[],
+	maturity?: Maturity[],
+	domain: any,
+	media?: string[],
+	thumbnail?: string,
+	capacity: number
 }
 
 // TODO: Existing roles in Overte?

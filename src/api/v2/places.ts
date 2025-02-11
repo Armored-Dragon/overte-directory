@@ -13,4 +13,14 @@ places.get('/', async (req, res) => {
 	res.json(apiResponse);
 });
 
+places.post('/', async (req, res) => {
+	console.log(`POST /places`);
+
+	// TODO: Validate query
+	console.log(req.body);
+	const apiResponse = await apiv2.postPlace()(req.body);
+
+	res.json(apiResponse);
+});
+
 export default places;

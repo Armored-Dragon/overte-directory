@@ -15,9 +15,9 @@ export const patchDomain = () => domains.patchDomain;
 export const deleteDomain = () => domains.deleteDomain;
 
 export const getPlace = () => places.getPlace;
-// export const postPlace = () => places.post;
-// export const patchPlace = () => places.patch;
-// export const deletePlace = () => places.delete;
+export const postPlace = () => places.postPlace;
+// export const patchPlace = () => places.patchPlace;
+// export const deletePlace = () => places.deletePlace;
 
 // export const getUsers = () => users.get;
 // export const postUser = () => users.post;

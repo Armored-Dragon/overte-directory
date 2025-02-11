@@ -56,6 +56,8 @@ model Place {
   maturity    Maturity   @default(UNRATED)
   domain      Domain?    @relation(fields: [domainId], references: [id])
   domainId    String?
+
+  @@unique([domainId, name])
 }
 
 enum Visibility {
