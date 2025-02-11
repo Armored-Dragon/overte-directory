@@ -67,6 +67,9 @@ export type patchDomain = {
 	maturity?: Maturity[],
 	protocolVersion?: string,
 }
+export type deleteDomain = {
+	id: string,
+}
 
 // TODO: Existing roles in Overte?
 const enum DirectoryRole {

@@ -37,4 +37,15 @@ domains.patch('/', async (req, res) => {
 	res.json(apiResponse);
 });
 
+domains.delete('/', async (req, res) => {
+	console.log(`DELETE /domains`);
+
+	// TODO: Validate query
+
+	console.log(req.body);
+	const apiResponse = await apiv2.deleteDomain()(req.body);
+
+	res.json(apiResponse);
+});
+
 export default domains;

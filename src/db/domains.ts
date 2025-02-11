@@ -4,7 +4,7 @@ import * as types from './db_types'
 const prisma = new PrismaClient();
 
 // Search for a domain in the database.
-export async function getDomains(query: types.domainQuery = {}){
+export async function getDomain(query: types.domainQuery = {}){
 	try {
 		let whereObject : types.domainQuery = {
 			id: query.id,
@@ -94,4 +94,28 @@ export async function patchDomain(query : types.patchDomain){
 }
 
 // Delete a domain from the database
-export function deleteDomain(){}
+export async function deleteDomain(query : types.deleteDomain){
+	try {
+		let dataObject : types.deleteDomain = {
+			id: query.id
+		}
+
+		const response = await prisma.domain.delete({ where: { id: dataObject.id } });
+
+		console.log(response);
+
+		return { success: true };
+	}
+	catch (e) {
+		// TODO: Make this a separate file?
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			if (e.code === "P2025") {
+				// Not found error
+				return {success: false, error: "Domain does not exist."}
+			}
+			return {success: false, error: e.message};
+		}
+
+		return {success: false, error: "Unknown Error"};
+	}
+}
