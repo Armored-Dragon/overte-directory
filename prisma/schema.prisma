@@ -24,19 +24,22 @@ model User {
 }
 
 model Domain {
-  id          String     @id @default(uuid())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @default(now())
-  name        String
-  description String
-  tags        String[]
-  visibility  Visibility @default(PRIVATE)
-  address     String
-  port        String
-  iceAddress  String
-  places      Place[]
-  owner       User?      @relation(fields: [userId], references: [id])
-  userId      String?
+  id              String     @id @default(uuid())
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @default(now())
+  name            String
+  description     String?
+  tags            String[]
+  visibility      Visibility @default(PRIVATE)
+  address         String
+  port            String
+  // iceAddress  String // TODO: Should be delivered by the server, not kept in the database?
+  places          Place[]
+  protocolVersion String
+  owner           User       @relation(fields: [userId], references: [id])
+  userId          String
+
+  @@unique([userId, name])
 }
 
 model Place {
@@ -56,9 +59,9 @@ model Place {
 }
 
 enum Visibility {
-  OPEN
+  PUBLIC
   FRIENDS
-  CONNECTION
+  CONNECTIONS
   PRIVATE
 }
 

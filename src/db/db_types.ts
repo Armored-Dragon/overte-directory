@@ -43,29 +43,42 @@ export type patchUser = {
 	connections?: UserConnection[],
 }
 
+export type postDomain = {
+	name: string, 
+	description?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	address: string,
+	port: string,
+	managers?: string[],
+	maturity?: Maturity[],
+	owner: any,
+	protocolVersion: string,
+}
+
 // TODO: Existing roles in Overte?
-enum DirectoryRole {
+const enum DirectoryRole {
 	ADMIN = "ADMIN",
 	MODERATOR = "MODERATOR",
 	USER = "USER",
 	BANNED = "BANNED"
 }
 
-enum DomainRole {
+const enum DomainRole {
 	ADMIN = "ADMIN",
 	BUILDER = "BUILDER",
 	MODERATOR = "MODERATOR",
 	USER = "USER",
 }
 
-enum DomainVisibility {
+const enum DomainVisibility {
 	OPEN = "OPEN",
 	FRIENDS = "FRIENDS",
 	CONNECTIONS = "CONNECTIONS",
 	PRIVATE = "PRIVATE"
 }
 
-enum Maturity {
+const enum Maturity {
 	ADULT = "ADULT",
 	MATURE = "MATURE",
 	TEEN = "TEEN",
@@ -73,7 +86,7 @@ enum Maturity {
 	UNRATED = "UNRATED"
 }
 
-enum UserAvailability {
+const enum UserAvailability {
 	FRIENDS = "FRIENDS",
 	CONNECTIONS = "CONNECTIONS",
 	ALL = "ALL"

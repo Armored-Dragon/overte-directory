@@ -10,6 +10,7 @@ import * as domains from './domains';
 
 // export const getUsers = (query: types.userQuery) => users.getUsers;
 export const getDomains = (query: types.domainQuery) => domains.getDomains;
+export const postDomain = (query: types.domainQuery) => domains.postDomain;
 
 
 // export function getPlaces(query: types.placeQuery = {}){}

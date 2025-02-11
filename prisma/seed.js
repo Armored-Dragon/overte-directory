@@ -74,7 +74,8 @@ function generateRandomDomain(){
 		description: randomString(1000, 400),
 		address: "localhost",
 		port: "40100",
-		iceAddress: "localhost"
+		protocolVersion: "3894729375=="
+		// iceAddress: "localhost"
 	}
 	return domain;
 }
