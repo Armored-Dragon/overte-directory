@@ -19,10 +19,7 @@ export const postPlace = () => places.postPlace;
 export const patchPlace = () => places.patchPlace;
 export const deletePlace = () => places.deletePlace;
 
-// export const getUsers = () => users.get;
-// export const postUser = () => users.post;
-// export const patchUser = () => users.patch;
-// export const deleteUser = () => users.delete;
-
-// export const getUsers = (query: types.userQuery) => users.getUsers;
-// export function getPlaces(query: types.placeQuery = {}){}
+export const getUser = () => users.getUser;
+export const postUser = () => users.postUser;
+export const patchUser = () => users.patchUser;
+export const deleteUser = () => users.deleteUser;

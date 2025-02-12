@@ -1,11 +1,4 @@
-// GET request query types for returning data from the database
-export type userQuery = {
-	id?: string, 
-	username?: string, 
-	email?: string,
-	availability?: string[],
-	roles?: DirectoryRole[]				// This is a directory level list of roles that a user has. Do not confuse this for domain level roles.
-}
+
 
 // POST request for creating data for the database
 export type postUser = {
@@ -61,7 +54,6 @@ export type deleteDomain = {
 	id: string,
 }
 
-
 export type getPlace = {
 	id?: string,
 	name?: string,
@@ -96,6 +88,14 @@ export type patchPlace = {
 }
 export type deletePlace = {
 	id: string
+}
+
+export type getUser = {
+	id?: string, 
+	username?: string, 
+	email?: string,
+	availability?: string[],
+	roles?: DirectoryRole[]
 }
 
 
