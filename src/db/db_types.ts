@@ -1,21 +1,5 @@
 
 
-// POST request for creating data for the database
-export type postUser = {
-	username: string, 
-	email: string,
-	password: string,
-}
-
-// PATCH request for updating data for the database
-export type patchUser = {
-	username?: string, 
-	email?: string,
-	password?: string,
-	availability?: UserAvailability,
-	roles?: DirectoryRole[],
-	connections?: UserConnection[],
-}
 
 export type getDomain = {
 	id?: string,
@@ -97,7 +81,24 @@ export type getUser = {
 	availability?: string[],
 	roles?: DirectoryRole[]
 }
-
+export type postUser = {
+	username: string, 
+	email: string,
+	password: string,
+	roles?: DirectoryRole[]
+}
+export type patchUser = {
+	id: string,
+	username?: string, 
+	email?: string,
+	password?: string,
+	availability?: UserAvailability,
+	roles?: DirectoryRole[],
+	connections?: UserConnection[],
+}
+export type deleteUser = {
+	id: string
+}
 
 // TODO: Existing roles in Overte?
 const enum DirectoryRole {

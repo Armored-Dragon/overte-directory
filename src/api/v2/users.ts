@@ -13,4 +13,34 @@ users.get('/', async (req, res) => {
 	res.json(apiResponse);
 });
 
+users.post('/', async (req, res) => {
+	console.log(`POST /users`);
+
+	// TODO: Validate query
+	console.log(req.body);
+	const apiResponse = await apiv2.postUser()(req.body);
+
+	res.json(apiResponse);
+});
+
+users.patch('/', async (req, res) => {
+	console.log(`PATCH /users`);
+
+	// TODO: Validate query
+	console.log(req.body);
+	const apiResponse = await apiv2.patchUser()(req.body);
+
+	res.json(apiResponse);
+});
+
+users.delete('/', async (req, res) => {
+	console.log(`DELETE /users`);
+
+	// TODO: Validate query
+	console.log(req.body);
+	const apiResponse = await apiv2.deleteUser()(req.body);
+
+	res.json(apiResponse);
+});
+
 export default users;
