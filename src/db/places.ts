@@ -68,6 +68,67 @@ export async function postPlace(query: types.postPlace){
 	}
 }
 
+export async function patchPlace(query: types.patchPlace){
+	try {
+		let dataObject : types.patchPlace = {
+			id: query.id,
+			name: query.name,
+			description: query.description,
+			tags: query.tags,
+			visibility: query.visibility,
+			managers: query.managers,
+			maturity: query.maturity,
+			media: query.media,
+			thumbnail: query.thumbnail,
+			capacity: query.capacity,
+		}
 
-// export async function patchPlace(query: types.getPlace = {}){}
-// export async function deletePlace(query: types.getPlace = {}){}
+		// TODO: Validate query
+		// TODO: Permission checks
+		// TODO: Fix typechecking
+		const response = await prisma.place.update({ where: { id: dataObject.id }, data: { ...dataObject as object } });
+
+		return {success: true, place: response as object };
+	} catch (e) {
+		console.error(e);
+		// TODO: Make this a separate file?
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			console.log(e.code);
+			if (e.code === "P2002") {
+				// Constraint failures
+				// Typically this is when we try to create some flavor of a duplicate entry.
+				return {success: false, error: "Place already exists with that name in the domain."}
+			}
+			return {success: false, error: e.message};
+		}
+
+		return {success: false, error: "Unknown Error"};
+	}
+}
+
+export async function deletePlace(query: types.deletePlace){
+	try {
+		let dataObject : types.deletePlace = {
+			id: query.id
+		}
+
+		// TODO: Validate query
+		// TODO: Permission checks
+		// TODO: Fix typechecking
+		const response = await prisma.place.delete({ where: dataObject });
+
+		return {success: true, place: response as object };
+	} catch (e) {
+		console.error(e);
+		// TODO: Make this a separate file?
+		if (e instanceof Prisma.PrismaClientKnownRequestError) {
+			if (e.code === "P2025") {
+				// Not found error
+				return {success: false, error: "Place does not exist."}
+			}
+			return {success: false, error: e.message};
+		}
+
+		return {success: false, error: "Unknown Error"};
+	}
+}

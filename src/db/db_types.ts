@@ -82,6 +82,22 @@ export type postPlace = {
 	thumbnail?: string,
 	capacity: number
 }
+export type patchPlace = {
+	id: string,
+	name?: string,
+	description?: string,
+	tags?: string[],
+	visibility?: DomainVisibility[],
+	managers?: string[],
+	maturity?: Maturity[],
+	media?: string[],
+	thumbnail?: string,
+	capacity?: number
+}
+export type deletePlace = {
+	id: string
+}
+
 
 // TODO: Existing roles in Overte?
 const enum DirectoryRole {
