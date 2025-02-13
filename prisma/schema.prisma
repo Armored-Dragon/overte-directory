@@ -20,6 +20,7 @@ model User {
   username  String   @unique
   email     String?  @unique
   password  String
+  role      Role     @default(USER)
   domain    Domain[]
 }
 
@@ -60,6 +61,14 @@ model Place {
   @@unique([domainId, name])
 }
 
+model Media {
+  id        String  @id @default(uuid())
+  url       String
+  mediaType String
+  Place     Place?  @relation(fields: [placeId], references: [id])
+  placeId   String?
+}
+
 enum Visibility {
   PUBLIC
   FRIENDS
@@ -75,10 +84,9 @@ enum Maturity {
   UNRATED
 }
 
-model Media {
-  id        String  @id @default(uuid())
-  url       String
-  mediaType String
-  Place     Place?  @relation(fields: [placeId], references: [id])
-  placeId   String?
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+  BANNED
 }
