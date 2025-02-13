@@ -1,6 +1,7 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import express from 'express';
-import * as types from './db_types'
+import * as types from './db_types';
+import * as crypto from './crypto';
 
 const prisma = new PrismaClient();
 
@@ -19,13 +20,14 @@ export async function getUser(query: types.getUser = {}){
 			where: whereObject as Object,
 		});
 
-		return {success: true, response: response};
+		const sanitizedResponse = crypto.removeSensitive(response);
+
+		return {success: true, response: sanitizedResponse as object};
 	} catch (e) {
 		console.error(e);
 		return {success: false, error: e};
 	}
 }
-
 
 // Create a new user and insert them into the database
 export async function postUser(query: types.postUser){
@@ -37,10 +39,13 @@ export async function postUser(query: types.postUser){
 			password: query.password
 		};
 
-		// TODO: Hash password
+		// Hash the password
+		dataObject.password = crypto.hashText(dataObject.password);
 
 		const response = await prisma.user.create({ data: dataObject as any });
-		return {success: true, response: response};
+		const sanitizedResponse = crypto.removeSensitive(response);
+
+		return {success: true, response: sanitizedResponse as object};
 	} catch (e) {
 		console.error(e);
 		return {success: false, error: e};
@@ -63,12 +68,19 @@ export async function patchUser(query: types.patchUser){
 		// FIXME: Connections
 		// Connections can be added or removed, special handling is required.
 
+		// Hash password
+		// Only called if the user is changing their password
+		if (dataObject.password !== undefined) {
+			dataObject.password = crypto.hashText(dataObject.password);
+		}
+
 		// TODO: Validate query
 		// TODO: Permission checks
 		// TODO: Fix typechecking
 		const response = await prisma.user.update({ where: { id: dataObject.id }, data: dataObject as object });
+		const sanitizedResponse = crypto.removeSensitive(response);
 
-		return {success: true, user: response as object };
+		return {success: true, user: sanitizedResponse as object };
 	} catch (e) {
 		console.error(e);
 		return {success: false, error: e};
