@@ -53,20 +53,12 @@ model Place {
   visibility  Visibility @default(PRIVATE)
   capacity    Int
   thumbnail   String?
-  media       Media[]
+  media       String[]
   maturity    Maturity   @default(UNRATED)
   domain      Domain?    @relation(fields: [domainId], references: [id])
   domainId    String?
 
   @@unique([domainId, name])
-}
-
-model Media {
-  id        String  @id @default(uuid())
-  url       String
-  mediaType String
-  Place     Place?  @relation(fields: [placeId], references: [id])
-  placeId   String?
 }
 
 enum Visibility {
